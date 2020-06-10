@@ -5,6 +5,7 @@ class UI {
     this.bodyInput = document.querySelector('#body');
     this.idInput = document.querySelector('#id');
     this.postSubmit = document.querySelector('.post-submit');
+    this.container = document.querySelector('.postsContainer');
     this.forState = 'add';
   }
 
@@ -27,6 +28,31 @@ class UI {
       `;
     });
     this.posts.innerHTML = output;
+  }
+
+  clearInputs() {
+    this.titleInput.value = '';
+    this.bodyInput.value = '';
+  }
+
+  showAlert(msg, className) {
+    // Clear any remaining alerts
+    this.clearAlert();
+    // Create and insert div
+    const div = document.createElement('div');
+    div.className = 'alert';
+    div.className = `${div.className} alert-${className}`;
+    div.textContent = msg;
+    this.container.insertBefore(div, this.posts);
+
+    setTimeout(this.clearAlert, 3000);
+  }
+
+  clearAlert() {
+    const currentAlert = document.querySelector('.alert');
+    if (currentAlert) {
+      currentAlert.remove();
+    }
   }
 }
 
